@@ -1,0 +1,22 @@
+section {
+  display: flex;
+}
+section .content {
+  width: 300px;
+  height: 100vh;
+  overflow-y: auto;
+  display: inline-block;
+  flex: 1;
+}
+section .content ul {
+  display: block;
+}
+section .content li {
+  align-items: center;
+  background: #e8f3fe;
+  margin: 10px;
+  color: #7dbcfc;
+}
+section .content li img {
+  width: 100%;
+}

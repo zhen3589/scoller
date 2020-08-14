@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="./css/scller.css">
+</head>
+
+<body>
+
+    <section>
+        <div class="content"></div>
+    </section>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/scroll.js"></script>
+
+    <script>
+        var cont = 5; // 页数
+        var page = 0; // 当前页
+        var list_length = 5
+
+        for (let i = 0; i < list_length; i++) {
+            let str = `<div class="content scller${i}"><ul></ul></div>`;
+            $('section').append(str)
+        }
+
+        for (let i = 0; i < list_length; i++) {
+
+            $(`scller${i}`).Scoller(res => {
+                console.log(res); // 返回加载到第几页
+                $.ajax({
+                    url: 'https://api.apiopen.top/getImages', // 公开接口
+                    type: 'post',
+                    data: {
+                        page: 0,
+                        count: cont
+                    },
+                    success: res => {
+                        let data = res.result;
+                        for (let i in data) {
+                            let str = `<li><img width:100% src="${data[i].img}" alt=""></li>`
+                            $(`.scller${i} ul`).append(str);
+                        }
+                    }
+                })
+            })
+
+        }
+
+    </script>
+
+</body>
+
+</html>
