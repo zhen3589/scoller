@@ -1,9 +1,14 @@
 (function ($) {
 	$.fn.extend({
-		Scoller: function (rolling) {
+		Scoller: function (rolling, loading_page) {
 			let page = 0;
-            let scller = document.querySelector($(this).selector);
-            console.log(scller);
+			let scller = document.querySelector($(this).selector);
+
+			if (loading_page) {
+				$(scller).append(
+					`<div class="loading"><i class="iconfont icon-jiazaizhong"></i><p>加载中</p></div>`
+				);
+			}
 
 			loading();
 			function loading() {
@@ -11,18 +16,18 @@
 				let box_height = $(scller).height();
 
 				if (content_height <= box_height) {
-					rolling(page++);
+					console.log(rolling(page++));
 
 					setTimeout(() => {
 						loading();
-					}, 500);
+					}, 800);
 				}
 			}
 
 			scller.onscroll = function () {
 				let scrollTop = scller.scrollTop || scller.scrollTop;
-				let windowHeight = scller.clientHeight || scller.clientHeight;
-				let scrollHeight = scller.scrollHeight || scller.scrollHeight;
+				let windowHeight =  scller.clientHeight;
+				let scrollHeight = scller.scrollHeight;
 
 				if (scrollTop + windowHeight == scrollHeight) {
 					rolling(page++);
